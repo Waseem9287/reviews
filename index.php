@@ -22,9 +22,9 @@ require_once "db_init.php";
         ?>
         <div class="review">
             <div class="review_user">
-                <div class="review_id">№<?= $comment["id"] ?></div>
-                Name: <div class="review_name"><?= $comment["user_name"] ?></div>
-                <div class="review_date"> <?= date("Y-m-d H:i:s", $comment["datetime"]); ?></div>
+                <span class="review_id">№<?= $comment["id"] ?></span>
+                Name: <span class="review_name"><?= $comment["user_name"] ?></span>
+                <span class="review_date"> <?= date("Y-m-d H:i:s", $comment["datetime"]); ?></span>
             </div>
 
             <div class="review_description">Tittle: <span class="review_tittle"><?= $comment["description"] ?></span></div>
@@ -47,16 +47,17 @@ require_once "db_init.php";
 </div>
 
 <div class="form">
+    <h1>Оставьте свой отзыв:</h1>
     <form name="comment" title="Оставьте свой отзыв">
 
         <div>
             <label>Enter your name:</label>
-            <input required type="text" name="user_name" class=""><br>
+            <input required type="text" name="user_name" class="form_name">
         </div>
 
         <div>
             <label>Enter description your review:</label>
-            <input required name="review_tittle" class=""><br>
+            <input required name="review_tittle" class="form_description">
         </div>
 
         <div>
@@ -70,7 +71,7 @@ require_once "db_init.php";
         </div>
 
         <div>
-            <button value="Go!"> asdasd as</button>
+            <button value="Go!">Отправить!</button>
         </div>
 
     </form>

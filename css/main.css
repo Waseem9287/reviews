@@ -25,19 +25,18 @@ body {
 }
 
 .review {
-    margin:     25px 0;
-
-    border: 1px solid;
-    border-radius: 30px;
+    margin:         25px 0;
+    border:         1px solid;
+    border-radius:  25px;
 }
 
 .review_user {
-    padding: 5px 10px;
+    padding:       5px 10px;
     border-bottom: 1px solid;
 }
 
 .review_user>div {
-    display: inline-block;
+    display:    inline-block;
     font-family:"Roboto BoldItalic", Garuda ;
 }
 
@@ -54,13 +53,15 @@ body {
 }
 
 .review_date {
-    float: right;
+    float:     right;
+    font-size: 1em;
 }
 
 .review_description, .review_content {
-    padding: 10px 25px;
+    padding:     10px 25px;
     white-space: pre-line;
-    overflow-x:hidden
+    overflow-x:  hidden;
+    word-wrap:   break-word;
 }
 
 .review_tittle {
@@ -68,11 +69,57 @@ body {
 }
 
 .image_wrapper {
-    width: 100%;
+    width:      100%;
     overflow-x: auto;
-    padding: 25px 50px;
+    padding:    25px 50px;
 }
 
 comment>div {
-    width: 100%;
+    width:      100%;
+}
+
+.form {
+    width: 80%;
+    margin: 0 10%;
+}
+
+.form h1 {
+    text-align: center;
+}
+
+.form {
+
+}
+
+.form form {
+    border: 3px solid;
+    padding: 20px;
+    border-radius: 30px;
+    background: #ffffff;
+}
+
+.form_name, .form_description  {
+    margin: 10px;
+    background: 0;
+    border-bottom: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+
+.form .errorMsg {
+    display: inline;
+    color: red;
+    font-family: "Roboto Bold";
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+    .review_date {
+        background: #000000;
+    }
 }
