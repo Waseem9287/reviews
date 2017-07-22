@@ -1,4 +1,7 @@
 "use strict";
+
+var form = document.comment;
+
 function reload(selector, data) {
     document.querySelector(selector).innerHTML += data;
     return false;
@@ -11,17 +14,15 @@ function clearForm(form) {
     }
 }
 
-var form = document.comment;
 form.addEventListener('submit', function (ev) {
         var output = document.getElementById('answer'),
             data = new FormData(form);
-
         var request = new XMLHttpRequest();
         request.open("POST", "db_record.php", true);
         request.onload = function () {
             if (request.status == 200) {
                 output.innerHTML = "Сообщение отправлено успешно!";
-                reload(".reviews", request.response);
+                reload(".content", request.response);
                 clearForm(form);
             } else {
                 output.innerHTML = request.response + "<br \/>";

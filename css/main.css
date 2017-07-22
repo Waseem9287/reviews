@@ -1,0 +1,78 @@
+body {
+    font-family: "Roboto Regular", Garuda,"Tibetan Machine Uni";
+    margin:      0;
+    background-color: rgba(20,200,200,0.15);
+}
+
+.header {
+    background-color: #009494;
+    width:            100%;
+    height:           72px;
+}
+
+.logo {
+    font-family:"Roboto Black", Garuda;
+    font-size:   3em;
+    color:       #1fbaba;
+    margin-left: 10%;
+    text-shadow: 0 0 4px #014e4e;
+}
+
+.content {
+    width:      80%;
+    margin:     0 10%;
+    text-align: justify;
+}
+
+.review {
+    margin:     25px 0;
+
+    border: 1px solid;
+    border-radius: 30px;
+}
+
+.review_user {
+    padding: 5px 10px;
+    border-bottom: 1px solid;
+}
+
+.review_user>div {
+    display: inline-block;
+    font-family:"Roboto BoldItalic", Garuda ;
+}
+
+.review_id {
+    padding-right: 20px;
+}
+
+.review_name:first-letter{
+    text-transform: uppercase;
+}
+
+.review_name {
+    font-family: "Roboto Black"!important;
+}
+
+.review_date {
+    float: right;
+}
+
+.review_description, .review_content {
+    padding: 10px 25px;
+    white-space: pre-line;
+    overflow-x:hidden
+}
+
+.review_tittle {
+    font-family: "Roboto Black";
+}
+
+.image_wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 25px 50px;
+}
+
+comment>div {
+    width: 100%;
+}
