@@ -54,7 +54,7 @@ function showError(element, errorMessage){
 }
 
 function resetError(element){
-    element.className = "";
+    element.className -= "error";
     if ((element.lastChild) && (element.lastChild.className == "errorMsg")){
         element.removeChild(element.lastChild);
     }
