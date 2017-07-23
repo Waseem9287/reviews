@@ -63,7 +63,7 @@ require_once "db_init.php";
 
         <div class="review_description">
             <div>
-                <label>Tittle:</label>
+                <label>Title:</label>
                 <input required name="review_tittle" class="form_description">
             </div>
         </div>

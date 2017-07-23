@@ -47,6 +47,8 @@ $user_name = clean($_POST['user_name']);
 $description = clean($_POST['review_tittle']);
 $content = clean($_POST['review_content']);
 $date = time();
+
+var_dump($user_name, $description, $content);
 validateData($user_name, $description, $content, $captcha);
 $db_record =
     "INSERT INTO `comments` (`user_name`, `description`, `content`, `image`, `datetime`) 
@@ -86,7 +88,7 @@ function clean($value = "") {
     $value = stripslashes($value);
     $value = strip_tags($value);
     $value = htmlspecialchars($value);
-
+    $value = str_replace("'", "\'", $value);
     return $value;
 }
 
@@ -125,6 +127,9 @@ function validateData($user_name, $description, $content, $captcha) {
 
 function displayView($id, $name, $description, $content, $image_path, $date) {
     $datetime = date("Y-m-d H:i:s", $date);
+    $name = str_replace("\'", "'", $name);
+    $description = str_replace("\'", "'", $description);
+    $content = str_replace("\'", "'", $content);
     echo "
             <div class='review'>
                 <div class='review_user'>
