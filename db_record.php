@@ -1,6 +1,8 @@
 <?php
 require_once ("db_init.php");
 
+$_FILES['image'];
+
 $image = $_FILES['image'];
 if ($image['size'] > 0) {
     if ($image['error'] > 0) {
@@ -11,17 +13,19 @@ if ($image['size'] > 0) {
         exit();
     }
 
-    if (!(($image['type'] = 'image/jpeg') ||
-        ($image['type'] = 'image/png')    ||
-        ($image['type'] = 'image/gif')))
+    if (!(($image['type'] == 'image/jpeg') ||
+        ($image['type'] == 'image/png')    ||
+        ($image['type'] == 'image/gif')))
     {
         header("HTTP/1.0 400 bad request");
-        echo "Данный тип файла не поддерживается!";exit();
+        echo "Данный тип файла не поддерживается!";
+        exit();
     }
 
-    if ($image['size'] > 20000000) {
+    if ($image['size'] > 2000000) {
         header("HTTP/1.0 400 bad request");
-        echo "Вы привысили максимальный объем файла!";exit();
+        echo "Вы привысили максимальный объем файла!";
+        exit();
     }
 
     $extension = new SplFileInfo($image['name']);
@@ -38,11 +42,12 @@ else {
     $image_path = NULL;
 }
 
+$captcha = $_POST['g-recaptcha-response'];
 $user_name = clean($_POST['user_name']);
 $description = clean($_POST['review_tittle']);
 $content = clean($_POST['review_content']);
 $date = time();
-validateData($user_name, $description, $content);
+validateData($user_name, $description, $content, $captcha);
 $db_record =
     "INSERT INTO `comments` (`user_name`, `description`, `content`, `image`, `datetime`) 
          VALUES ('{$user_name}', '{$description}', '{$content}', '{$image_path}', '{$date}');";
@@ -51,7 +56,6 @@ $STH->execute();
 $id = $db->query('SELECT MAX(id) FROM comments');
 $id = $id->fetch();
 displayView($id['MAX(id)'], $user_name, $description, $content, $image_path, $date);
-
 
 function displayImageError($error) {
     switch ($error) {
@@ -86,7 +90,7 @@ function clean($value = "") {
     return $value;
 }
 
-function validateData($user_name, $description, $content) {
+function validateData($user_name, $description, $content, $captcha) {
 
     if(!$user_name || !$description || !$content) {
         header("HTTP/1.0 400 bad request");
@@ -111,20 +115,26 @@ function validateData($user_name, $description, $content) {
         echo "Отзыв заполнен некорректно!";
         exit();
     }
+    if (!$captcha)
+    {
+        header("HTTP/1.0 400 bad request");
+        echo "Подтвердите что вы не робот!";
+        exit();
+    }
 }
 
 function displayView($id, $name, $description, $content, $image_path, $date) {
     $datetime = date("Y-m-d H:i:s", $date);
     echo "
             <div class='review'>
-            <div class='review_user'>
-                <div class='review_id'>№{$id}</div>
-                Name: <div class='review_name'>{$name}</div>
-                <div class='review_date'>{$datetime}</div>
-            </div>
+                <div class='review_user'>
+                    <div class='review_id'>№{$id}</div>
+                    Name: <div class='review_name'>{$name}</div>
+                    <div class='review_date'>{$datetime}</div>
+                </div>
 
-            <div class='review_description'>Tittle: <span class='review_tittle'>{$description}</span></div>
-            <div class='review_content'><p>{$content}</p></div>";
+                <div class='review_description'>Tittle: <span class='review_tittle'>{$description}</span></div>
+                <div class='review_content'><p>{$content}</p></div>";
             if (file_exists($image_path)) {
                 echo "
                 <div class='image_wrapper'>
@@ -133,5 +143,5 @@ function displayView($id, $name, $description, $content, $image_path, $date) {
                     </a>
                 </div> ";
             }
-    echo "</div>";
+    echo "  </div>";
 }

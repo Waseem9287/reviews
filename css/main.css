@@ -1,11 +1,12 @@
 body {
     font-family: "Roboto Regular", Garuda,"Tibetan Machine Uni";
     margin:      0;
-    background-color: rgba(20,200,200,0.15);
+    background:  url("../images/IehB7.png");
+    color:       #698CC0;
 }
 
 .header {
-    background-color: #009494;
+    background-color: #212121;
     width:            100%;
     height:           72px;
 }
@@ -13,9 +14,9 @@ body {
 .logo {
     font-family:"Roboto Black", Garuda;
     font-size:   3em;
-    color:       #1fbaba;
+    color:       #919191;
     margin-left: 10%;
-    text-shadow: 0 0 4px #014e4e;
+    text-shadow: 0 0 4px #4e4e4e;
 }
 
 .content {
@@ -25,24 +26,26 @@ body {
 }
 
 .review {
-    margin:     25px 0;
-
-    border: 1px solid;
-    border-radius: 30px;
+    width: auto;
+    margin:         25px 0;
+    border:         1px solid #4e4e4e;
+    border-radius:  10px;
+    background:     #22222b;
 }
 
 .review_user {
-    padding: 5px 10px;
-    border-bottom: 1px solid;
+    padding:       5px 10px;
+    border-bottom: 1px solid #4e4e4e;
 }
 
 .review_user>div {
-    display: inline-block;
+    display:    inline-block;
     font-family:"Roboto BoldItalic", Garuda ;
 }
 
 .review_id {
-    padding-right: 20px;
+    padding-right:  20px;
+    color:          #C9BE89;
 }
 
 .review_name:first-letter{
@@ -54,13 +57,14 @@ body {
 }
 
 .review_date {
-    float: right;
+    float:     right;
+    font-size: 1em;
 }
 
 .review_description, .review_content {
-    padding: 10px 25px;
-    white-space: pre-line;
-    overflow-x:hidden
+    padding:     10px 25px;
+    overflow-x:  hidden;
+    word-wrap:   break-word;
 }
 
 .review_tittle {
@@ -68,11 +72,165 @@ body {
 }
 
 .image_wrapper {
-    width: 100%;
+    width:      100%;
     overflow-x: auto;
-    padding: 25px 50px;
+    padding:    25px 50px;
 }
 
 comment>div {
-    width: 100%;
+    width:      100%;
+}
+
+.form {
+    width:  80%;
+    margin: 0 10%;
+}
+
+.form h1 {
+    text-align: center;
+    color:      #C9BE89;
+}
+
+.form_button {
+    border:     3px solid rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0);
+    width:      10%;
+    height:     6%;
+    outline:    none;
+}
+
+.form_button:hover {
+    background: rgb(255, 255, 255);
+    transition: 1s;
+    border:     3px solid rgb(0, 0, 0);
+}
+
+.form_name, .form_description  {
+    color:          #698CC0;
+    margin:         10px;
+    background:     0;
+    border-bottom:  1px solid #C9BE89;
+    border-top:     none;
+    border-left:    none;
+    border-right:   none;
+    outline:        none;
+}
+
+.form .errorMsg {
+    display:     inline;
+    color:       red;
+    font-family: "Roboto Bold";
+}
+
+.form_content {
+    padding:  5px 25px;
+    position: relative;
+    display: block;
+}
+
+.form_content textarea {
+    width:  100%;
+    height: 150px;
+}
+
+.file_upload {
+    position:    relative;
+    overflow:    hidden;
+    font-size:   1em;
+    height:      2em;
+    line-height: 2em;
+    padding:     0 25px;
+    transition:  box-shadow 0.1s linear;
+}
+
+.form_submit button, .file_upload button {
+    float:      right;
+    width:      8em;
+    height:     100%;
+    border:     1px solid #4e4e4e;
+    background: #22222b;
+    color:      #C9BE89;
+    transition: 0.5s;
+    cursor:     pointer;
+}
+
+.file_upload div {
+    padding-left: 2em;
+}
+
+.file_upload input {
+    position:   absolute;
+    left:       0;
+    top:        0;
+    width:      100%;
+    height:     100%;
+    transform:  scale(20);
+    opacity:    0;
+    cursor:     pointer
+}
+
+.form_submit {
+    padding:    5px 25px;
+    height:     2em;
+}
+
+.file_upload button:hover, .form_submit button:hover {
+    border:     1px solid #4e4e4e;
+    background: #C9BE89;
+    color:      #22222b;
+}
+
+.form_captcha {
+    margin: 0 25px;
+}
+
+#response {
+    text-align: center;
+}
+
+.access {
+    color: green;
+}
+
+.error {
+    color: red;
+}
+
+#areaLetters {
+    position:   absolute;
+    right:      40px;
+    bottom:     5px;
+}
+
+@media only screen and ( max-width: 480px ){
+    .review_date {
+        font-size: 2em;
+    }
+
+    .file_upload div{
+        display: none
+    }
+
+    .file_upload button, .form_submit button{
+        width: 100%;
+        font-size: 2em;
+        height: 4em;
+        line-height: 4em;
+    }
+
+    .form_description {
+        font-size: 1em;
+    }
+
+    .review_description {
+        font-size: 2.5em;
+    }
+
+    .form_name {
+        font-size: 1.5em;
+    }
+
+    .review_user {
+        font-size: 2em;
+    }
 }

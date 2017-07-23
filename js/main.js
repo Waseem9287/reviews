@@ -2,6 +2,13 @@
 
 var form = document.comment;
 
+
+form.review_content.addEventListener("keyup", function () {
+    var length = this.value.length;
+    document.querySelector("#areaLetters").innerHTML = String(500 - length);
+});
+
+
 function reload(selector, data) {
     document.querySelector(selector).innerHTML += data;
     return false;
@@ -12,19 +19,23 @@ function clearForm(form) {
     for (var i = 0; i < form.elements.length; i++){
         form.elements[i].value = "";
     }
+    document.querySelector(".file_upload>div").innerHTML = "Вы можете прекрепить картинку";
 }
 
 form.addEventListener('submit', function (ev) {
-        var output = document.getElementById('answer'),
+        var output = document.getElementById('response'),
             data = new FormData(form);
         var request = new XMLHttpRequest();
         request.open("POST", "db_record.php", true);
         request.onload = function () {
             if (request.status == 200) {
+                output.className = "access";
                 output.innerHTML = "Сообщение отправлено успешно!";
                 reload(".content", request.response);
                 clearForm(form);
+                grecaptcha.reset();
             } else {
+                output.className = "error";
                 output.innerHTML = request.response + "<br \/>";
             }
         };
@@ -35,13 +46,11 @@ form.addEventListener('submit', function (ev) {
 // Validation on Front for inputs
 
 function showError(element, errorMessage){
-
     element.className += 'error';
     var msgElem = document.createElement('div');
     msgElem.className = "errorMsg";
     msgElem.innerHTML = errorMessage;
     element.appendChild(msgElem);
-
 }
 
 function resetError(element){
@@ -51,32 +60,34 @@ function resetError(element){
     }
 }
 
-document.comment.user_name.onblur = function () {
-    if ( !((2 < this.value.length) && (this.value.length < 19)) ) {
+
+form.image.onfocus = function () {
+    if (this.value) {
+        document.querySelector(".file_upload>div").innerHTML = this.value;
+    }
+};
+form.user_name.onblur = function () {
+    if ( !((1 < this.value.length) && (this.value.length < 19)) ) {
         showError(this.parentNode, "Имя должно содержать от 2 до 18 символов!");
     }
 };
 
-document.comment.user_name.onfocus = function () {
+form.user_name.onfocus = function () {
     resetError(this.parentNode)
 };
 
-document.comment.review_tittle.onblur = function () {
+form.review_tittle.onblur = function () {
     if ( !((4 < this.value.length) && (this.value.length < 51)) ) {
         showError(this.parentNode, "Тема должна содержать от 5 до 50 символов!");
     }
 };
 
-document.comment.review_tittle.onfocus = function () {
+form.review_tittle.onfocus = function () {
     resetError(this.parentNode)
 };
 
-document.comment.review_content.onblur = function () {
+form.review_content.onblur = function () {
     if (this.value.length > 500){
         showError(this.parentNode, "Удивительно, как у тебя это получилось?")
     }
-};
-
-document.comment.review_content.onfocus = function () {
-    resetError(this.parentNode)
 };
