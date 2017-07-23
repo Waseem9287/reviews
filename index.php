@@ -52,7 +52,7 @@ require_once "db_init.php";
     <form name="comment" title="Оставьте свой отзыв">
         <div class="review">
 
-        <div class="review_user">
+        <div class="form_user">
             <div class="review_name">
                 <div>
                     <label>Name:</label>
