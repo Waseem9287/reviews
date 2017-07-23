@@ -1,7 +1,9 @@
 <?php
 require_once ("db_init.php");
 
-$_FILES['image'];
+/**
+ * Validation for image, if it is.
+ */
 
 $image = $_FILES['image'];
 if ($image['size'] > 0) {
@@ -59,8 +61,17 @@ $id = $db->query('SELECT MAX(id) FROM comments');
 $id = $id->fetch();
 displayView($id['MAX(id)'], $user_name, $description, $content, $image_path, $date);
 
-function displayImageError($error) {
-    switch ($error) {
+
+/**
+ *
+ * Return Image Error Text.
+ *
+ * @param $error_code
+ *
+ * @return string
+ */
+function displayImageError($error_code) {
+    switch ($error_code) {
         case 1 || 2:
             return("Размер файла выше допустимого!");
             break;
@@ -83,6 +94,14 @@ function displayImageError($error) {
     }
 }
 
+/**
+ *
+ * Return clean vars.
+ *
+ * @param string $value
+ * @return string
+ */
+
 function clean($value = "") {
     $value = trim($value);
     $value = stripslashes($value);
@@ -91,6 +110,16 @@ function clean($value = "") {
     $value = str_replace("'", "\'", $value);
     return $value;
 }
+
+/**
+ *
+ * Validation for $_POST data.
+ *
+ * @param $user_name
+ * @param $description
+ * @param $content
+ * @param $captcha
+ */
 
 function validateData($user_name, $description, $content, $captcha) {
 
@@ -124,6 +153,18 @@ function validateData($user_name, $description, $content, $captcha) {
         exit();
     }
 }
+
+/**
+ *
+ * Return response view for review page.
+ *
+ * @param $id
+ * @param $name
+ * @param $description
+ * @param $content
+ * @param $image_path
+ * @param $date
+ */
 
 function displayView($id, $name, $description, $content, $image_path, $date) {
     $datetime = date("Y-m-d H:i:s", $date);

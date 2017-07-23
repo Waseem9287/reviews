@@ -2,17 +2,31 @@
 
 var form = document.comment;
 
-
 form.review_content.addEventListener("keyup", function () {
     var length = this.value.length;
     document.querySelector("#areaLetters").innerHTML = String(500 - length);
 });
 
+/**
+ *
+ * Display data to selector.
+ *
+ * @param selector
+ * @param data
+ *
+ */
 
 function reload(selector, data) {
     document.querySelector(selector).innerHTML += data;
     return false;
 }
+
+/**
+ *
+ * Clearing form after success request.
+ *
+ * @param form
+ */
 
 function clearForm(form) {
     console.log(form);
@@ -21,6 +35,12 @@ function clearForm(form) {
     }
     document.querySelector(".file_upload>div").innerHTML = "Вы можете прекрепить картинку";
 }
+
+/**
+ *
+ * Forming and sending request
+ *
+ */
 
 form.addEventListener('submit', function (ev) {
         var output = document.getElementById('response'),
@@ -43,7 +63,13 @@ form.addEventListener('submit', function (ev) {
         ev.preventDefault();
 }, false);
 
-// Validation on Front for inputs
+/**
+ *
+ * Display error message in element.
+ *
+ * @param element
+ * @param errorMessage
+ */
 
 function showError(element, errorMessage){
     element.className += 'error';
@@ -53,6 +79,13 @@ function showError(element, errorMessage){
     element.appendChild(msgElem);
 }
 
+/**
+ *
+ * Clearing error message in element.
+ *
+ * @param element
+ */
+
 function resetError(element){
     element.className -= "error";
     if ((element.lastChild) && (element.lastChild.className == "errorMsg")){
@@ -60,6 +93,11 @@ function resetError(element){
     }
 }
 
+/**
+ *
+ * Validation for inputs.
+ *
+ */
 
 form.image.onfocus = function () {
     if (this.value) {
